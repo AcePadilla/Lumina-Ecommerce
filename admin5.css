@@ -1,0 +1,580 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(230, 75%, 56%);
+  --title-color: hsl(230, 75%, 15%);
+  --text-color: hsl(220, 5%, 12%);
+  --body-color: hsl(230, 100%, 98%);
+  --container-color: hsl(230, 100%, 97%);
+  --border-color: hsl(230, 25%, 80%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Syne", sans-serif;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: .938rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1023px) {
+  :root {
+    --h2-font-size: 1.5rem;
+    --normal-font-size: 1rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+input,
+button {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color:white;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: auto; /* Baguhin ang margin para maging auto at nasa gitna */
+}
+
+.main {
+  position: relative;
+  height: 100vh;
+}
+
+header{
+    background-color: #113e67;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+header h2{
+    text-align: center;
+    color:white;
+    font-size:24px;
+}
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #191d2b;
+    color: #fff;
+    padding: 20px 0;
+    transition: all 0.3s ease; /* Smooth transition for sidebar animations */
+}
+.sidebar li a{
+  text-decoration: none;
+  text-align: left;
+}
+.sidebar img{
+    width: 250px;
+    align-items: center;
+    margin:0 auto;
+    justify-content: center;
+    display:flex;
+}
+.sidebar a{
+  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+.nav__sidebar {
+    list-style: none;
+}
+
+.nav__list {
+    list-style: none;
+}
+
+.nav__item {
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 5px;
+}
+
+.nav__item a {
+    color: #a4a6b3;
+    font-size: 18px;
+    padding: 10px 0; /* Larger click area */
+    display: block; /* Makes the whole area clickable */
+    transition: color 0.3s ease;
+    margin: 10px;
+}
+
+.nav__item a:hover {
+    color: #ffffff;
+    background-color: #1e2330;
+    padding-left: 5px; /* Small indent on hover */
+}
+
+/* Content */
+.content {
+    margin-left: 250px; 
+    padding: 20px;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease; /* Smooth transition for responsive adjustments */
+}
+
+/* Initially hide all sections */
+.content section {
+    display: none;
+}
+
+/* Optionally, style the active navigation item */
+.nav__item.active a {
+    color: #ffffff;
+    background-color: #5867dd; /* Adjust if you have a different highlight color */
+}
+ h3 {
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #6e7293;
+}
+
+input[type=text],
+input[type=number],
+select,
+textarea,
+button {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #e4e6ef;
+    transition: all 0.3s ease; /* Smooth transitions for form elements */
+}
+
+input[type=text]:focus,
+input[type=number]:focus,
+select:focus,
+textarea:focus {
+    border-color: #5867dd;
+    box-shadow: 0 0 0 2px rgba(88,103,221,0.2);
+}
+
+button {
+    background-color: #5867dd;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3f4d9f;
+}
+
+/* Enhance table styling */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden; /* Ensures the box-shadow doesn't get cut off */
+}
+
+th, td {
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background-color: #113e67;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
+
+.item-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+/* FOOTER */
+.footer.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	justify-content: space-between;
+    margin-left: 120px;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #191b24;
+    padding: 60px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #ca9263;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 12px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #0048ff;
+}
+
+
+/* loader */
+
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* ensure loader appears on top of other content */
+  }
+  .loader {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  .truckWrapper {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: hidden;
+  }
+  /* truck upper body */
+  .truckBody {
+  width: 130px;
+  height: fit-content;
+  margin-bottom: 6px;
+  animation: motion 1s linear infinite;
+  }
+  /* truck suspension animation*/
+  @keyframes motion {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+  }
+  /* truck's tires */
+  .truckTires {
+  width: 130px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0px 15px;
+  position: absolute;
+  bottom: 0;
+  }
+  .truckTires svg {
+  width: 24px;
+  }
+  
+  .road {
+  width: 100%;
+  height: 1.5px;
+  background-color: #282828;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+  border-radius: 3px;
+  }
+  .road::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background-color: #282828;
+  right: -50%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 10px solid white;
+  }
+  .road::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #282828;
+  right: -65%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 4px solid white;
+  }
+  
+  .lampPost {
+  position: absolute;
+  bottom: 0;
+  right: -90%;
+  height: 90px;
+  animation: roadAnimation 1.4s linear infinite;
+  }
+  
+  @keyframes roadAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
+  }
+  
+  .open-item-modal-btn {
+    color:#113e67;
+  }
+
+
+  .open-modal{
+    color:#113e67;
+
+  }
+
+a.delete{
+  color:red;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #113e67;
+  border: none;
+  color: white;
+  padding: 12px 26px;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover{
+  transition: all 200ms ease-in-out;
+  background-color: #0384fc;
+}
+h3,p{
+  text-align: center;
+}
+h3{
+  font-size: 40px;
+  margin-top: 10px;
+  color:var(--title-color);
+  
+}
+p{
+  margin-bottom: 10px;
+}
+h2{
+  font-size: 28px;
+  margin: 20px auto;
+  text-align: center;
+}
+.infobox{
+  display: flex;
+}
+#calculator-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #113e67;
+  transform: translate(-50%, -50%);
+  border: 2px solid #ccc;
+  padding: 20px;
+  z-index: 9999;
+  display: none; /* itago ang iframe sa simula */
+
+}
+
+/* Style para sa close button */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+button.calc{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
